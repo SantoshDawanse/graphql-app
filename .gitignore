@@ -1,0 +1,9 @@
+tmp
+vendor
+.idea
+.DS_Store
+static
+.vscode
+.env
+.graphqlrc
+vendor/
