@@ -3,14 +3,19 @@ package main
 import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	log "github.com/santoshdawanse/graphql-app/config/logger"
 	"github.com/santoshdawanse/graphql-app/graph"
 	"github.com/santoshdawanse/graphql-app/graph/resolver"
-	"log"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"os"
 )
 
 const defaultPort = "8080"
+
+func init() {
+	log.InitializeLogger()
+}
 
 func main() {
 	port := os.Getenv("PORT")
@@ -23,6 +28,6 @@ func main() {
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	logrus.Infof("connect to http://localhost:%s/ for GraphQL playground", port)
+	logrus.Error(http.ListenAndServe(":"+port, nil))
 }
