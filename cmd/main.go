@@ -2,12 +2,11 @@ package main
 
 import (
 	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/playground"
 	log "github.com/santoshdawanse/graphql-app/config/logger"
 	"github.com/santoshdawanse/graphql-app/graph"
 	"github.com/santoshdawanse/graphql-app/graph/resolver"
+	"github.com/santoshdawanse/graphql-app/server"
 	"github.com/sirupsen/logrus"
-	"net/http"
 	"os"
 )
 
@@ -23,11 +22,9 @@ func main() {
 		port = defaultPort
 	}
 
+	// starting a server
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &resolver.Resolver{}}))
-
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", srv)
-
+	echo := server.New(srv)
 	logrus.Infof("connect to http://localhost:%s/ for GraphQL playground", port)
-	logrus.Error(http.ListenAndServe(":"+port, nil))
+	logrus.Error(echo.Start(":" + port))
 }
