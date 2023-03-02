@@ -6,15 +6,15 @@ package resolver
 
 import (
 	"context"
-	"fmt"
-
 	"github.com/santoshdawanse/graphql-app/graph"
 	"github.com/santoshdawanse/graphql-app/graph/model"
+	"github.com/sirupsen/logrus"
 )
 
 // User is the resolver for the user field.
 func (r *todoResolver) User(ctx context.Context, obj *model.Todo) (*model.User, error) {
-	panic(fmt.Errorf("not implemented: User - user"))
+	logrus.Info("Querying user...")
+	return &model.User{}, nil
 }
 
 // Todo returns graph.TodoResolver implementation.

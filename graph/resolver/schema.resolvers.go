@@ -7,6 +7,7 @@ package resolver
 import (
 	"context"
 	"fmt"
+	"github.com/sirupsen/logrus"
 
 	"github.com/santoshdawanse/graphql-app/graph"
 	"github.com/santoshdawanse/graphql-app/graph/model"
@@ -19,7 +20,8 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+	logrus.Info("Querying todos ...")
+	return nil, nil
 }
 
 // Mutation returns graph.MutationResolver implementation.
